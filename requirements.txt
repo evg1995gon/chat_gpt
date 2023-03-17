@@ -1,0 +1,13 @@
+Package           Version
+----------------- --------
+asgiref           3.6.0
+da-vinci          0.3.0
+Django            3.2
+django-thumbnails 0.7.0
+gunicorn          20.1.0
+Pillow            9.4.0
+pip               23.0.1
+pytz              2022.7.1
+setuptools        63.2.0
+shortuuid         1.0.11
+sqlparse          0.4.3
