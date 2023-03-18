@@ -2,7 +2,6 @@ from pictures.forms import PictureForm
 from django.shortcuts import render, redirect, get_object_or_404
 from pictures.models import Pictures
 from pictures.gpt import GPT_function, creating_picture
-import urllib.request
 
 
 def picture_view(request):
@@ -23,7 +22,6 @@ def picture_view(request):
         gpt_return = GPT_function(name)
         print(gpt_return)
         if gpt_return == 'http://unavailable':
-            print('1')
             my_picture.delete()
             return redirect('pictures:index')
         my_picture.picture_url = gpt_return
@@ -32,6 +30,7 @@ def picture_view(request):
         return redirect('pictures:list')
     return render(request, template, context)
 
+
 def picture_view_list(request):
     objects = Pictures.objects.all()
     context = {
@@ -39,6 +38,7 @@ def picture_view_list(request):
     }
     template = 'pictures/list.html'
     return render(request, template, context)
+
 
 def picture_detail(request, id):
     obj = get_object_or_404(Pictures, id=id)

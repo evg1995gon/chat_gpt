@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from .views import picture_view, picture_view_list, picture_detail
 
 app_name = 'pictures'

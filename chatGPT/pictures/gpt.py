@@ -15,20 +15,20 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 def GPT_function(name):
     try:
         response = openai.Image.create(
-        prompt=f"{name}",
-        n=1,
-        size="1024x1024"
+            prompt=f"{name}", n=1, size="1024x1024"
         )
         image_url = response['data'][0]['url']
         return image_url
-    except:
+    except Exception as e:
+        print(e)
         return 'http://unavailable'
+
 
 def creating_picture(obj):
     if obj.picture_url and not obj.picture:
         result = urllib.request.urlretrieve(obj.picture_url)
         obj.picture.save(
-                os.path.basename(obj.picture_url),
-                File(open(result[0], 'rb'))
-                )
+            os.path.basename(obj.picture_url),
+            File(open(result[0], 'rb'))
+        )
         obj.save()
