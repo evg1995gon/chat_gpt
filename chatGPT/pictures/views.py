@@ -18,10 +18,12 @@ def picture_view(request):
     if form.is_valid():
         name = form.data['name']
         form.save()
-        my_picture = Pictures.objects.filter(name=name)[0]
-        result = urllib.request.urlretrieve(GPT_function('name'))
-        my_picture.picture = result
-        # my_picture.picture = GPT_function(name)
+        my_picture = Pictures.objects.filter(name=name)[-1]
+        gpt_return = GPT_function(name)
+        if gpt_return == 'http://unavailable':
+            my_picture.delete()
+            return redirect('pictures:index')
+        my_picture.picture_url = gpt_return
         my_picture.save()
         return redirect('pictures:list')
     return render(request, template, context)

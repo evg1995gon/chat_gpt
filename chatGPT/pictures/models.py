@@ -12,7 +12,11 @@ class Pictures(models.Model):
         upload_to='pictures/',
         blank=True,
     )
-
+    picture_url = models.URLField(
+        max_length=1000,
+        blank=False,
+        null=False,
+    )
     pub_date = models.DateTimeField(
         auto_now_add=True,
     )

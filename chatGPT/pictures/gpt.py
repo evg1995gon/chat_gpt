@@ -17,10 +17,13 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 def GPT_function(name):
-    # response = openai.Image.create(
-    #     prompt=f"{name}",
-    #     n=1,
-    #     size="1024x1024"
-    # )
-    # image_url = response['data'][0]['url']
-    return 'http://google.com/'
+    try:
+        response = openai.Image.create(
+        prompt=f"{name}",
+        n=1,
+        size="1024x1024"
+        )
+        image_url = response['data'][0]['url']
+        return image_url
+    except:
+        return 'http://unavailable'
